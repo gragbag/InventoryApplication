@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	</head>
+	<body>
+		<form action="/new" method="post">
+			<label for="title">Title:</label>
+			<input type="text" name="title" id="title" />
+
+			<label for="genre">Genre:</label>
+			<select id="genre" name="genre">
+				<% for (let i = 0; i < genres.length; i++) { const genre = genres[i].genre; %>
+				<option value="<%= genre %>"><%= genre %></option>
+				<% } %>
+			</select>
+
+			<label for="developer">Developer:</label>
+			<select id="developer" name="developer">
+				<% for (let i = 0; i < developers.length; i++) { const developer = developers[i].developer; %>
+				<option value="<%= developer %>"><%= developer %></option>
+				<% } %>
+			</select>
+
+			<button type="submit">Submit</button>
+		</form>
+	</body>
+</html>

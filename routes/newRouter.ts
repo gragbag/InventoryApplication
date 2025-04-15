@@ -9,4 +9,10 @@ newRouter.get("/", async (req, res) => {
 	res.render("new", { genres, developers });
 });
 
+newRouter.post("/", async (req, res) => {
+	const title = req.body.title;
+	const genre = req.body.genre;
+	const developer = req.body.developer;
+});
+
 export default newRouter;

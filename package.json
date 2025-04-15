@@ -1,40 +1,51 @@
 {
-  "name": "inventoryapplication",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gragbag/InventoryApplication.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/gragbag/InventoryApplication/issues"
-  },
-  "homepage": "https://github.com/gragbag/InventoryApplication#readme",
-  "description": "",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.5.0",
-    "express": "^5.1.0",
-    "pg": "^8.14.1",
-    "ts-node": "^10.9.2"
-  },
-  "devDependencies": {
-    "@types/cors": "^2.8.17",
-    "@types/express": "^5.0.1",
-    "@types/node": "^22.14.1",
-    "@types/pg": "^8.11.13",
-    "ejs": "^3.1.10",
-    "express-async-handler": "^1.2.0",
-    "express-validator": "^7.2.1",
-    "nodemon": "^3.1.9",
-    "ts-node-dev": "^2.0.0",
-    "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.8.3"
-  }
+	"name": "inventoryapplication",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dev": "concurrently \"nodemon app.ts\" \"npm run watch:css\"",
+		"start": "node app.ts",
+		"build": "tsc && npm run build:css",
+		"build:css": "postcss views/styles.css -o public/styles.css",
+		"watch:css": "postcss views/styles.css -o public/styles.css --watch"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/gragbag/InventoryApplication.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/gragbag/InventoryApplication/issues"
+	},
+	"homepage": "https://github.com/gragbag/InventoryApplication#readme",
+	"description": "",
+	"dependencies": {
+		"cors": "^2.8.5",
+		"dotenv": "^16.5.0",
+		"express": "^5.1.0",
+		"pg": "^8.14.1",
+		"ts-node": "^10.9.2"
+	},
+	"devDependencies": {
+		"@tailwindcss/cli": "^4.1.4",
+		"@tailwindcss/postcss": "^4.1.4",
+		"@types/cors": "^2.8.17",
+		"@types/express": "^5.0.1",
+		"@types/node": "^22.14.1",
+		"@types/pg": "^8.11.13",
+		"autoprefixer": "^10.4.21",
+		"concurrently": "^9.1.2",
+		"ejs": "^3.1.10",
+		"express-async-handler": "^1.2.0",
+		"express-validator": "^7.2.1",
+		"nodemon": "^3.1.9",
+		"postcss": "^8.5.3",
+		"tailwindcss": "^4.1.4",
+		"ts-node-dev": "^2.0.0",
+		"tsconfig-paths": "^4.2.0",
+		"typescript": "^5.8.3"
+	}
 }

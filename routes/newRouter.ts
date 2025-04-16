@@ -2,17 +2,10 @@ import { Router } from "express";
 const newRouter = Router();
 
 import db from "../db/queries";
+import gameController from "../controllers/gameController";
 
-newRouter.get("/", async (req, res) => {
-	const genres = await db.getAllGenres();
-	const developers = await db.getAllDevelopers();
-	res.render("new", { genres, developers });
-});
+newRouter.get("/", gameController.displayGameForm);
 
-newRouter.post("/", async (req, res) => {
-	const title = req.body.title;
-	const genre = req.body.genre;
-	const developer = req.body.developer;
-});
+newRouter.post("/", ...gameController.insertNewGame);
 
 export default newRouter;

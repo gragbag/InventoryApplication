@@ -6,18 +6,30 @@ async function getAllGames() {
 }
 
 async function insertGame(title: string, genres: string[], developers: string[]) {
-	const result = await pool.query("INSERT INTO games (title) VALUES ($1)", [title]);
-	const game_id = result.rows[0]["id"];
+	const result = await pool.query("INSERT INTO games (title) VALUES ($1) RETURNING id", [title]);
+	const game_id = result.rows[0].id;
 
-	for (let genre in genres) {
-		const genre_id = await pool.query("SELECT id FROM genres WHERE genre=$(1)", [genre]);
+	for (const genre of genres) {
+		const result = await pool.query("SELECT id FROM genres WHERE genre=($1)", [genre]);
+		const genre_id = result.rows[0].id;
 		await pool.query("INSERT INTO gamegenres (game_id, genre_id) VALUES ($1, $2)", [game_id, genre_id]);
 	}
 
-	for (let developer in developers) {
-		const developer_id = await pool.query("SELECT id FROM developers WHERE developer=$(1)", [developer]);
-		await pool.query("INSERT INTO gamedeveloper (game_id, developer_id) VALUES ($1, $2)", [game_id, developer_id]);
+	for (const developer of developers) {
+		const result = await pool.query("SELECT id FROM developers WHERE developer=($1)", [developer]);
+		const developer_id = result.rows[0].id;
+		await pool.query("INSERT INTO gamedevelopers (game_id, developer_id) VALUES ($1, $2)", [game_id, developer_id]);
 	}
+
+	return game_id;
+}
+
+async function insertGameGenre(game_id: number, genre_id: number) {
+	await pool.query("INSERT INTO gamegenres(game_id, genre_id) VALUES ($1, $2)", [game_id, genre_id]);
+}
+
+async function insertGameDeveloper(game_id: number, developer_id: number) {
+	await pool.query("INSERT INTO gamedevelopers(game_id, developer_id) VALUES ($1, $2)", [game_id, developer_id]);
 }
 
 async function getAllGenres() {
@@ -30,6 +42,18 @@ async function getAllDevelopers() {
 	return rows;
 }
 
-const db = { getAllGames, insertGame, getAllGenres, getAllDevelopers };
+async function getGenreId(genre: string) {
+	const result = await pool.query("SELECT id FROM genres WHERE genre=($1)", [genre]);
+	const id: number = result.rows[0].id;
+	return id;
+}
+
+async function getDeveloperId(developer: string) {
+	const result = await pool.query("SELECT id FROM developers WHERE developer=($1)", [developer]);
+	const id: number = result.rows[0].id;
+	return id;
+}
+
+const db = { getAllGames, insertGame, getAllGenres, getAllDevelopers, getGenreId, getDeveloperId };
 
 export default db;

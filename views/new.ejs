@@ -6,8 +6,7 @@
 		<link rel="stylesheet" href="/styles.css" />
 	</head>
 	<body>
-		<h1 class="text-6xl font-bold underline bg-yellow-500">Hello world!!!!</h1>
-		<form action="/new" method="post" class="flex flex-col">
+		<form action="/new" method="POST" class="flex flex-col">
 			<label for="title">Title:</label>
 			<input type="text" name="title" id="title" />
 
@@ -31,6 +30,7 @@
 			</div>
 
 			<button type="submit">Submit</button>
+			<%- include("partials/errors.ejs") %>
 		</form>
 	</body>
 </html>

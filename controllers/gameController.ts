@@ -26,6 +26,17 @@ const displayGameForm = async (req: Request, res: Response) => {
 	res.render("new", { genres, developers });
 };
 
+const displayEditForm = async (req: Request, res: Response) => {
+	const title = await db.getGameById(req.params.id);
+	const genres = await db.getGenresOfGame(req.params.id);
+	const developers = await db.getDevelopersOfGame(req.params.id);
+
+	const allGenres = await db.getAllGenres();
+	const allDevelopers = await db.getAllDevelopers();
+
+	res.render("update", { title, genres, developers, allGenres, allDevelopers });
+};
+
 const insertNewGame = [
 	validateInput,
 	async (req: Request, res: Response) => {
@@ -58,6 +69,7 @@ const insertNewGame = [
 const gameController = {
 	displayGameForm,
 	insertNewGame,
+	displayEditForm,
 };
 
 export default gameController;

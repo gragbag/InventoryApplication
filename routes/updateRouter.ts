@@ -1,8 +1,7 @@
 import { Router } from "express";
+import gameController from "../controllers/gameController";
 const updateRouter = Router();
 
-updateRouter.get("/", (req, res) => {
-	res.render("update");
-});
+updateRouter.get("/:id", gameController.displayEditForm);
 
 export default updateRouter;

@@ -5,6 +5,34 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	</head>
 	<body>
+		<h1>Your Games:</h1>
+		<% for (let i = 0; i < games.length; i++) { const title = games[i].title; const id = games[i].id; const genres = games[i].genres; const developers = games[i].developers; %>
+		<h2><%= title %></h2>
+		<h3>Genres:</h3>
+		<ul>
+			<% for (let i = 0; i < genres.length; i++) { %>
+			<li><%= genres[i] %></li>
+			<% } %>
+		</ul>
+
+		<h3>Developers:</h3>
+		<ul>
+			<% for (let i = 0; i < developers.length; i++) { %>
+			<li><%= developers[i] %></li>
+			<% } %>
+		</ul>
+
+		<form action="/update/<%= id %>" method="get">
+			<button type="submit">Update</button>
+		</form>
+
+		<form action="/delete" method="post">
+			<button type="submit">Delete</button>
+		</form>
+
+		<% } %>
+
+		<br />
 		<form action="/new" method="get">
 			<button type="submit">Add A Game</button>
 		</form>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/styles.css" />
+	</head>
+	<body>
+		<form action="/update" method="POST" class="flex flex-col">
+			<label for="title">Title:</label>
+			<input type="text" name="title" id="title" value="<%= title %>" />
+
+			<div class="flex flex-row">
+				<label for="genre">Genre:</label>
+				<br />
+				<% allGenres.forEach(({ genre }) => { %>
+				<label> <input type="checkbox" name="genres" value="<%= genre %>" <%= genres.includes(genre) ? "checked" : "" %> /> <%= genre %> </label><br />
+				<% }) %>
+				<label for="developer">Developer:</label>
+				<br />
+				<% allDevelopers.forEach(({ developer }) => { %>
+				<label> <input type="checkbox" name="developers" value="<%= developer %>" <%= developers.includes(developer) ? "checked" : "" %> /> <%= developer %> </label>
+				<br />
+				<% }) %>
+			</div>
+
+			<button type="submit">Update</button>
+			<%- include("partials/errors.ejs") %>
+		</form>
+	</body>
+</html>
